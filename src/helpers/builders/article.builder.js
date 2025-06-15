@@ -1,32 +1,42 @@
 import { faker } from "@faker-js/faker";
 
 export class ArticleBuilder {
-    generateArticleTitle() {
-        this.articleTitle = faker.commerce.productName();
-        return this;
-    };
-
-    generateArticleInfo() {
-        this.articleInfo = faker.book.format();
-        return this;
-    };
-
-    generateArticleContent() {
-        this.articleContent = faker.lorem.paragraph();
-        return this;
-    };
-
-    generateArticleTag() {
-        this.articleTag = faker.book.genre();
-        return this;
-    };
-
+  
+    constructor() {
+      this.article = {};
+    }
+    
+    addTitle() {
+      this.article.title = faker.lorem.sentence();
+      return this;
+    }
+    
+    addDescription() {
+      this.article.description = faker.lorem.paragraph(1);
+      return this;
+    }
+    
+    addBody() {
+      this.article.body = `${faker.lorem.paragraphs(2)}\n\n## ${faker.lorem.words(3)}\n\n${faker.lorem.paragraph()}`;
+      return this;
+    }
+    
+    addCustomTitle(title) {
+      this.article.title = title;
+      return this;
+    }
+    
+    addCustomDescription(description) {
+      this.article.description = description;
+      return this;
+    }
+    
+    addCustomBody(body) {
+      this.article.body = body;
+      return this;
+    }
+    
     generate() {
-        return {
-            title: this.articleTitle,
-            aboutInfo: this.articleInfo,
-            content: this.articleContent,
-            tag: this.articleTag,    
-        }
-    };
-};
+      return { ...this.article };
+    }
+  }
